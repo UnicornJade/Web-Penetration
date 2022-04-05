@@ -1,0 +1,5 @@
+http://192.168.183.131/sqli-labs/Less-1/?id=1
+http://192.168.183.131/sqli-labs/Less-3/?id=1
+http://192.168.183.131/sqli-labs/Less-5/?id=1
+http://192.168.183.131/sqli-labs/Less-7/?id=1
+http://192.168.183.131/sqli-labs/Less-9/?id=1

